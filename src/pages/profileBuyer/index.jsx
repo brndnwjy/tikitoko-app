@@ -7,11 +7,16 @@ import location from "../../assets/location-icon.svg";
 import order from "../../assets/order-icon.svg";
 import Navbar from "../../component/module/navbar";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBuyer } from "../../redux/action/user.action";
+import { insertAddress, deletedAddress, updatedAddress } from "../../redux/action/address.action";
 
 const ProfileBuyer = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleSuccessGet = (data) => {}
   const [allItem, setAllItem] = useState([]);
-  // const statusOrder = allItem.map((item) => item.status);
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
@@ -73,23 +78,34 @@ const ProfileBuyer = () => {
     // setDateBirth(formattedDate);
   };
 
+  // const handleUpdate = (e) => {
+  //   const data = JSON.parse(localStorage.getItem("data"));
+  //   const buyer_id = data.buyer_id;
+  //   e.preventDefault();
+  //   let formData = new FormData(e.target);
+  //   formData.append("buyer_id", buyer_id);
+  //   axios
+  //     .put(
+  //       `${process.env.REACT_APP_BACKEND_URL}/v1/buyer/${buyer_id}`,
+  //       formData
+  //     )
+  //     .then((res) => {
+  //       alert("Update Success");
+  //     })
+  //     .catch((err) => {
+  //       alert("Update Failed");
+  //     });
+  // };
+  const handleSuccess = (data) => {
+    console.log(data);
+    alert("Update Success");
+  }
   const handleUpdate = (e) => {
     const data = JSON.parse(localStorage.getItem("data"));
     const buyer_id = data.buyer_id;
     e.preventDefault();
     let formData = new FormData(e.target);
-    formData.append("buyer_id", buyer_id);
-    axios
-      .put(
-        `${process.env.REACT_APP_BACKEND_URL}/v1/buyer/${buyer_id}`,
-        formData
-      )
-      .then((res) => {
-        alert("Update Success");
-      })
-      .catch((err) => {
-        alert("Update Failed");
-      });
+    dispatch(updateBuyer(buyer_id, formData, handleSuccess));
   };
 
   // const deleteUser = (e) => {
@@ -164,38 +180,44 @@ const ProfileBuyer = () => {
         postcode: addressForm.postcode,
         city: addressForm.city,
       };
-      axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/v1/address`, body, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((res) => {
-          setAddressForm(res.data.data);
-          alert("Add Address Success");
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Add Address Failed");
-        });
+      // axios
+      //   .post(`${process.env.REACT_APP_BACKEND_URL}/v1/address`, body, {
+      //     headers: {
+      //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //     },
+      //   })
+      //   .then((res) => {
+      //     setAddressForm(res.data.data);
+      //     alert("Add Address Success");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     alert("Add Address Failed");
+      //   });
+      dispatch(insertAddress(body, handleSuccess));
     }
   };
 
+  const handleSuccessDelete = (data) => {
+    console.log(data);
+    alert("Delete Success");
+  }
   const deleteAddress = (address_id) => {
-    axios
-      .delete(`${process.env.REACT_APP_BACKEND_URL}/v1/address/${address_id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setAddressForm(res.data.data);
-        alert("Delete Address Success");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Delete Address Failed");
-      });
+    // axios
+    //   .delete(`${process.env.REACT_APP_BACKEND_URL}/v1/address/${address_id}`, {
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     setAddressForm(res.data.data);
+    //     alert("Delete Address Success");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     alert("Delete Address Failed");
+    //   });
+    dispatch(deletedAddress(address_id, handleSuccessDelete));
   };
 
   const prepareDataAddress = (address_id) => {
@@ -215,24 +237,25 @@ const ProfileBuyer = () => {
 
   const updateAddress = (e) => {
     e.preventDefault();
-    axios
-      .put(
-        `${process.env.REACT_APP_BACKEND_URL}/v1/address/${editAddress.address_id}`,
-        editAddress,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        setAddressForm(res.data.data);
-        alert("Update Address Success");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Update Address Failed");
-      });
+    dispatch(updatedAddress(editAddress.address_id, editAddress, handleSuccess));
+    // axios
+    //   .put(
+    //     `${process.env.REACT_APP_BACKEND_URL}/v1/address/${editAddress.address_id}`,
+    //     editAddress,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     setAddressForm(res.data.data);
+    //     alert("Update Address Success");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     alert("Update Address Failed");
+    //   });
   };
 
   const logout = () => {
