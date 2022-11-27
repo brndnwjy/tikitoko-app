@@ -20,6 +20,14 @@ const ProfileBuyer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [editForm, setEditForm] = useState(false);
+  const handleEdit = () => {
+    if(editForm){
+      setEditForm(false)
+    } else {
+      setEditForm(true)
+    }
+  }
   const handleSuccessGet = (data) => {};
   const [allItem, setAllItem] = useState([]);
   useEffect(() => {
@@ -296,7 +304,7 @@ const ProfileBuyer = () => {
                 </div>
                 <div className="col-md-6 ">
                   <h6 className="mt-1">{users.name}</h6>
-                  <p>
+                  <p type="button" onClick={handleEdit}>
                     {/* <i className="text-muted">Ubah profile</i> */}
                     <img src={pencil} width={12} height={12} alt="profile" />
                     <small className="text-muted"> Ubah profile</small>
@@ -391,6 +399,7 @@ const ProfileBuyer = () => {
                           type="text"
                           name="name"
                           id="username"
+                          disabled={!editForm}
                           className="form-control"
                           placeholder="Masukkan nama"
                           defaultValue={users.name}
@@ -409,6 +418,7 @@ const ProfileBuyer = () => {
                           name="email"
                           id="email"
                           // disabled
+                          disabled={!editForm}
                           className="form-control"
                           placeholder="Masukkan email"
                           defaultValue={users.email}
@@ -426,6 +436,7 @@ const ProfileBuyer = () => {
                           type="text"
                           name="phone"
                           id="phone"
+                          disabled={!editForm}
                           className="form-control"
                           placeholder="Masukkan nomor telepon"
                           defaultValue={users.phone}
@@ -447,6 +458,7 @@ const ProfileBuyer = () => {
                                 <input
                                   type="radio"
                                   name="gender"
+                                  disabled={!editForm}
                                   value={1}
                                   defaultChecked={users?.gender == 1}
                                 />{" "}
@@ -456,6 +468,7 @@ const ProfileBuyer = () => {
                                 <input
                                   type="radio"
                                   name="gender"
+                                  disabled={!editForm}
                                   value={2}
                                   defaultChecked={users?.gender == 2}
                                 />{" "}
@@ -465,11 +478,15 @@ const ProfileBuyer = () => {
                           ) : (
                             <>
                               <p className="mx-2 text-muted">
-                                <input type="radio" name="gender" value={1} />{" "}
+                                <input type="radio" name="gender"
+                                disabled={!editForm}
+                                value={1} />{" "}
                                 Pria
                               </p>
                               <p className="mx-2 text-muted">
-                                <input type="radio" name="gender" value={2} />{" "}
+                                <input type="radio" name="gender"
+                                disabled={!editForm}
+                                value={2} />{" "}
                                 Perempuan
                               </p>
                             </>
@@ -489,6 +506,7 @@ const ProfileBuyer = () => {
                           // type="text"
                           name="birthdate"
                           id="date"
+                          disabled={!editForm}
                           className="form-control"
                           defaultValue={dateBirth}
                         />
