@@ -1,18 +1,18 @@
 // action for address reducer
 import axios from 'axios';
 
-// export const getAddress = () => {
-//     return {
-//         type: 'GET_ADDRESS',
-//         payload: axios({
-//             method: 'GET',
-//             url: `${process.env.REACT_APP_BACKEND_URL}/v1/address`,
-//             headers: {
-//                 Authorization: `Bearer ${localStorage.getItem('token')}`,
-//             },
-//         }),
-//     };
-// }
+export const getAddress = () => {
+    return {
+        type: 'GET_ADDRESS',
+        payload: axios({
+            method: 'GET',
+            url: `${process.env.REACT_APP_BACKEND_URL}/v1/address`,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        }),
+    };
+}
 
 export const insertAddress = (body, handleSuccess) => ({
     type: 'INSERT_ADDRESS',

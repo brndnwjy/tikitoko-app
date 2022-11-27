@@ -7,15 +7,20 @@ import location from "../../assets/location-icon.svg";
 import order from "../../assets/order-icon.svg";
 import Navbar from "../../component/module/navbar";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import Card from "../../component/module/card";
+import { useDispatch} from "react-redux";
 import { updateBuyer } from "../../redux/action/user.action";
-import { insertAddress, deletedAddress, updatedAddress } from "../../redux/action/address.action";
+import {
+  insertAddress,
+  deletedAddress,
+  updatedAddress,
+} from "../../redux/action/address.action";
 
 const ProfileBuyer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSuccessGet = (data) => {}
+  const handleSuccessGet = (data) => {};
   const [allItem, setAllItem] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -99,7 +104,7 @@ const ProfileBuyer = () => {
   const handleSuccess = (data) => {
     console.log(data);
     alert("Update Success");
-  }
+  };
   const handleUpdate = (e) => {
     const data = JSON.parse(localStorage.getItem("data"));
     const buyer_id = data.buyer_id;
@@ -160,6 +165,9 @@ const ProfileBuyer = () => {
     city: "",
   });
 
+  const handleSuccessInsert = (data) => {
+    alert("Insert Success");
+  }
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (
@@ -194,14 +202,14 @@ const ProfileBuyer = () => {
       //     console.log(err);
       //     alert("Add Address Failed");
       //   });
-      dispatch(insertAddress(body, handleSuccess));
+      dispatch(insertAddress(body, handleSuccessInsert));
     }
   };
 
   const handleSuccessDelete = (data) => {
     console.log(data);
     alert("Delete Success");
-  }
+  };
   const deleteAddress = (address_id) => {
     // axios
     //   .delete(`${process.env.REACT_APP_BACKEND_URL}/v1/address/${address_id}`, {
@@ -237,7 +245,9 @@ const ProfileBuyer = () => {
 
   const updateAddress = (e) => {
     e.preventDefault();
-    dispatch(updatedAddress(editAddress.address_id, editAddress, handleSuccess));
+    dispatch(
+      updatedAddress(editAddress.address_id, editAddress, handleSuccess)
+    );
     // axios
     //   .put(
     //     `${process.env.REACT_APP_BACKEND_URL}/v1/address/${editAddress.address_id}`,
@@ -764,7 +774,11 @@ const ProfileBuyer = () => {
                               data-bs-toggle="modal"
                               data-bs-target="#myModal2"
                               // button none decor
-                              style={{border: 'none', background: 'none', color: 'red'}}
+                              style={{
+                                border: "none",
+                                background: "none",
+                                color: "red",
+                              }}
                               onClick={() =>
                                 prepareDataAddress(item.address_id)
                               }
@@ -1076,32 +1090,13 @@ const ProfileBuyer = () => {
                   {allItem
                     ? allItem.map((item, index) => {
                         return (
-                          <div className="collapse multi-collapse" id="allItem">
-                            <div className="mt-3">
-                              <div className={styles["card"]}>
-                                <div className="card-body px-4 py-4">
-                                  <div className={styles["product"]}>
-                                    <div className="d-flex align-items-center">
-                                      <img
-                                        className={styles["product-img"]}
-                                        src={item.image}
-                                        width="60"
-                                        height="60"
-                                        alt="suite"
-                                      />
-                                      <div className={styles["brand"]}>
-                                        <h5>{item.name}</h5>
-                                        <p>{item.qty}</p>
-                                      </div>
-                                    </div>
-                                    <p className={styles["price"]}>
-                                      $ {item.price}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <Card
+                            title={item.name}
+                            storetitle={item.seller_name}
+                            image={item.image}
+                            price={item.price * item.qty}
+                            qty={item.qty}
+                          />
                         );
                       })
                     : null}
@@ -1167,38 +1162,20 @@ const ProfileBuyer = () => {
                   </p>
                   <hr />
                   {allItem
-                    ? 
-                      allItem.map((item, index) => {
+                    ? allItem.map((item, index) => {
                         if (item.status === 0) {
                           return (
                             <div
                               className="collapse multi-collapse"
                               id="notPaid"
                             >
-                              <div className="mt-3">
-                                <div className={styles["card"]}>
-                                  <div className="card-body px-4 py-4">
-                                    <div className={styles["product"]}>
-                                      <div className="d-flex align-items-center">
-                                        <img
-                                          className={styles["product-img"]}
-                                          src={item.image}
-                                          width="60"
-                                          height="60"
-                                          alt="suite"
-                                        />
-                                        <div className={styles["brand"]}>
-                                          <h5>{item.name}</h5>
-                                          <p>{item.qty}</p>
-                                        </div>
-                                      </div>
-                                      <p className={styles["price"]}>
-                                        $ {item.price}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                              <Card
+                                title={item.name}
+                                storetitle={item.seller_name}
+                                image={item.image}
+                                price={item.price * item.qty}
+                                qty={item.qty}
+                              />
                             </div>
                           );
                         }
@@ -1432,40 +1409,20 @@ const ProfileBuyer = () => {
                   </p>
                   <hr />
                   {allItem
-                    ? // allItem.map((item, index) => {
-                      //   if (item.status === "not yet paid") {
-
-                      allItem.map((item, index) => {
+                    ? allItem.map((item, index) => {
                         if (item.status === 1) {
                           return (
                             <div
                               className="collapse multi-collapse"
                               id="completed"
                             >
-                              <div className="mt-3">
-                                <div className={styles["card"]}>
-                                  <div className="card-body px-4 py-4">
-                                    <div className={styles["product"]}>
-                                      <div className="d-flex align-items-center">
-                                        <img
-                                          className={styles["product-img"]}
-                                          src={item.image}
-                                          width="60"
-                                          height="60"
-                                          alt="suite"
-                                        />
-                                        <div className={styles["brand"]}>
-                                          <h5>{item.name}</h5>
-                                          <p>{item.qty}</p>
-                                        </div>
-                                      </div>
-                                      <p className={styles["price"]}>
-                                        $ {item.price}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                              <Card
+                                title={item.name}
+                                storetitle={item.seller_name}
+                                image={item.image}
+                                price={item.price * item.qty}
+                                qty={item.qty}
+                              />
                             </div>
                           );
                         }

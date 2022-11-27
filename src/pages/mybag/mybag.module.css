@@ -1,5 +1,5 @@
 .main {
-    margin-top: 100px;
+    margin-top: 150px;
 }
 
 .card {
@@ -16,6 +16,12 @@
     margin-bottom: 30px;
 }
 
+.product-img {
+    border-radius: 8px;
+    margin-right: 11px;
+    width: 70px;
+    height: 70px;
+}
 
 .card .card-summary {
     font-weight: 600;
@@ -92,11 +98,6 @@
     margin-top: 5px;
     border: none;
     background-color: transparent;
-}
-
-.product-img {
-    border-radius: 8px;
-    margin-right: 11px;
 }
 
 .product {
