@@ -13,7 +13,7 @@ const SearchCategory = () => {
   const [data, setData] = useState([])
   const { id } = useParams();
   useEffect(() => {
-    axios.get(`http://localhost:3001/v1/product?category=${id}`)
+    axios.get(`http://localhost:4000/v1/product?category=${id}`)
       .then((response) => {
         console.log(response.data.data)
         setData(response.data.data)

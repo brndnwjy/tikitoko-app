@@ -31,23 +31,97 @@ import { Pagination, Navigation } from "swiper";
 import axios from 'axios'
 
 const Home = () => {
-  // const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
+  const [search, setSearch] = useState();
 
-  // useEffect(() => {
-  //   axios.get(`http://localhost:3001/v1/category`)
-  //     .then((response) => {
-  //       console.log(response.data.data)
-  //       setData(response.data.data)
-  //     })
-  //     .catch((error) => {
-  //       console.error(error)
-  //     })
-  // }, [])
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault()
+      return navigate(`/search?q=${search}`);
+    }
+  };
+
+  // const [query, setQuery] = useState();
+
+  // const handleSearch = (e) => {
+  //   // e.preventDefault()
+  //   if(e.key === "Enter"){
+  //     if(query !== null){
+  //       return navigate(`/search?search=${query}`)
+  //     }alert('please input any character')
+  //   }
+  // }
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/v1/product`)
+      .then((response) => {
+        console.log(response.data.data);
+        setData(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        // router.push('/login')
+      });
+  }, []);
+
+  const [sort, setSort] = useState("product_id");
+  const [asc, setAsc] = useState("asc");
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    getDataProduct(sort, asc, 5, page);
+  }, [sort, asc, page]);
+  const getDataProduct = (sort, asc, limit, page) => {
+    axios
+      .get(
+        `http://localhost:4000/v1/product?sortby=${sort}&order=${asc}&limit=${limit}${page ? `&page=${page}` : ""
+        }`
+      )
+      .then((response) => {
+        console.log(response.data.data);
+        setData(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        // router.push('/login')
+      });
+  };
+
+  const handleSorting = () => {
+    if (sort == "product_id") {
+      setSort("name");
+    } else {
+      setSort("product_id");
+    }
+    getDataProduct(sort, asc, 5, page);
+  };
+
+  const handleSortasc = () => {
+    if (asc == "asc") {
+      setAsc("desc");
+    } else {
+      setAsc("asc");
+    }
+    getDataProduct(sort, asc, 5, page);
+  };
+
+  const NextPage = () => {
+    setPage(page + 1);
+    getDataProduct(sort, asc, 5, page);
+    console.log(page);
+  };
+  const PreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      console.log(page);
+      getDataProduct(sort, asc, 5, page - 1);
+    }
+  };
 
   return (
     <>
-
-      <Navbar />
+      {localStorage.token ? <NavbarLogin /> : <Navbar tergetClick={(e) => setSearch(e.target.value)} searchData={handleSearch} />}
 
       {/* <!-- Modal --> */}
       {/* <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -147,10 +221,39 @@ const Home = () => {
             <div className="col-md-12 g-0">
               <div className={`d-flex flex-column mt-5 ${styles.popularSide}`}>
                 <p className={styles.textTitlemain}> Popular </p>
-                <p className={styles.textSubmain}>Find clothes that are trending recently</p>
-               
-                  <CardProduct />
-                
+                <p className={styles.textSubmain}>
+                  Find clothes that are trending recently
+                </p>
+                <div className="dropdown mb-5">
+                  <button className={`btn btn-secondary dropdown-toggle ${styles.spanCostumsort}`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sort
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li><Link className="dropdown-item" href="#" onClick={() => handleSortasc()}>Sortir berdasarkan{asc}</Link></li>
+                    <li><Link className="dropdown-item" href="#" onClick={() => handleSorting()}>Sortir berdasarkan {sort}</Link></li>
+                  </ul>
+                </div>
+                <div className="row row-cols-1 row-cols-md-5 gx-0 gy-4">
+                  {/* {JSON.stringify(data)} */}
+                  {data.length === 0 ? (
+                    <h3> Data sudah habis </h3>
+                  ) : (
+                    data.map((item) => (
+                      <CardProduct
+                        byId={`/v1/product/${item.product_id}`}
+                        linkImage={item.image}
+                        nameProduct={item.name}
+                        priceProduct={item.price}
+                        sellerProduct={item.seller}
+                      />
+                    ))
+                  )}
+                </div>
+                <div className='row'>
+                  <button className="btn btn-primary my-5 col-md-2  mx-auto" onClick={() => PreviousPage()}> Prev </button>
+                  <button className="btn btn-primary my-5 col-md-2  mx-auto">{page}</button>
+                  <button className="btn btn-primary my-5 col-md-2  mx-auto" disabled={data <= 0} onClick={() => NextPage()}>Next</button>
+                </div>
               </div>
             </div>
           </div>

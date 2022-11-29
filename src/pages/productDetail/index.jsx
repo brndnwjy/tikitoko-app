@@ -28,14 +28,25 @@ import "./coba.css";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import axios from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import NavbarLogin from '../../component/module/navbarLogin'
 
 const ProductDetail = () => {
   const navigate = useNavigate()
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-  const [data, setData] = useState([])
+  const [recomend, setRecomend] = useState([]);
+  const [data, setData] = useState([]);
   const { id } = useParams();
+  let [count, setCount] = useState(0);
+
+  function incrementCount() {
+    count = count + 1;
+    setCount(count);
+  }
+  function decrementCount() {
+    count = count - 1;
+    setCount(count);
+  }
   useEffect(() => {
     axios.get(`http://localhost:3001/v1/product/${id}`)
       .then((response) => {
@@ -50,8 +61,8 @@ const ProductDetail = () => {
 
   const [update, setUpdate] = useState({
     pid: id,
-    qty: 10
-  })
+    qty: (count),
+  });
 
   const handlePostBag = (e) => {
     // const data = JSON.parse(localStorage.getItem("data"))
@@ -63,27 +74,94 @@ const ProductDetail = () => {
     }
     
     axios
-        .post(`http://localhost:3001/v1/cart`, form, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-            console.log(res);
-            // setImage("");
-            alert("Success");
-            return navigate('/mybag');
-        })
-        .catch((err) => {
-            console.log(err);
-            alert("Failed");
-        })
-  }
+      .post(`http://localhost:4000/v1/cart`, form, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        // setImage("");
+        alert("Success");
+        return navigate("/mybag");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Failed");
+      });
+  };
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/v1/product`)
+      .then((response) => {
+        console.log(response.data.data);
+        setRecomend(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        // router.push('/login')
+      });
+  }, []);
+
+
+  const [sort, setSort] = useState("product_id");
+  const [asc, setAsc] = useState("asc");
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    getDataProduct(sort, asc, 5, page);
+  }, [sort, asc, page]);
+  const getDataProduct = (sort, asc, limit, page) => {
+    axios
+      .get(
+        `http://localhost:4000/v1/product?sortby=${sort}&order=${asc}&limit=${limit}${page ? `&page=${page}` : ""
+        }`
+      )
+      .then((response) => {
+        console.log(response.data.data);
+        setRecomend(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        // router.push('/login')
+      });
+  };
+
+  const handleSorting = () => {
+    if (sort == "product_id") {
+      setSort("name");
+    } else {
+      setSort("product_id");
+    }
+    getDataProduct(sort, asc, 5, page);
+  };
+
+  const handleSortasc = () => {
+    if (asc == "asc") {
+      setAsc("desc");
+    } else {
+      setAsc("asc");
+    }
+    getDataProduct(sort, asc, 5, page);
+  };
+
+  const NextPage = () => {
+    setPage(page + 1);
+    getDataProduct(sort, asc, 5, page);
+    console.log(page);
+  };
+  const PreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      console.log(page);
+      getDataProduct(sort, asc, 5, page - 1);
+    }
+  };
+
+  
   return (
     <>
-      <Navbar />
-
+      {localStorage.token ? <NavbarLogin /> : <Navbar />}
       <section className={`mt-5 ${styles.main}`}>
         <div className="container">
           <div className="row">
@@ -176,11 +254,11 @@ const ProductDetail = () => {
               </div>
               <p className={`mt-5 ${styles.quantity} `}>Jumlah</p>
               <div className="d-flex flex-row">
-                <button className={styles.icMinus}>
+                <button className={styles.icMinus} disabled={count <= 0} onClick={decrementCount}>
                   <img src={icMinus} alt="icMinus" />
                 </button>
-                <div className={`mx-3 mt-1 ${styles.textCount}`}>10</div>
-                <button className={styles.icPlus}>
+                <div className={`mx-3 mt-1 ${styles.textCount}`}>{count}</div>
+                <button className={styles.icPlus} onClick={incrementCount}>
                   <img src={icPlus} alt="icPlus" />
                 </button>
               </div>
@@ -261,15 +339,43 @@ const ProductDetail = () => {
           <hr />
           <div className={`row ${styles.pageThree}`}>
             <p className={styles.Titlepagethree}>You can also like this</p>
-            <p className={styles.Subtitlepagethree}>You’ve never seen it before!</p>
+            <p className={styles.Subtitlepagethree}>
+              You’ve never seen it before!
+            </p>
+            <div className="dropdown mb-5">
+              <button className={`btn btn-secondary dropdown-toggle ${styles.spanCostumsort}`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort
+              </button>
+              <ul className="dropdown-menu">
+                <li><Link className="dropdown-item" href="#" onClick={() => handleSortasc()}>Sortir berdasarkan{asc}</Link></li>
+                <li><Link className="dropdown-item" href="#" onClick={() => handleSorting()}>Sortir berdasarkan {sort}</Link></li>
+              </ul>
+            </div>
             <div className="row row-cols-1 row-cols-md-5 gx-0 gy-4">
-              <CardProduct />
+              {/* {JSON.stringify(data)} */}
+              {recomend.length === 0 ? (
+                <h3> Data sudah habis </h3>
+              ) : (
+                recomend.map((item) => (
+                  <CardProduct
+                    byId={`/v1/product/${item.product_id}`}
+                    linkImage={item.image}
+                    nameProduct={item.name}
+                    priceProduct={item.price}
+                    sellerProduct={item.seller}
+                  />
+                ))
+              )}
+            </div>
+            <div className='row'>
+              <button className="btn btn-primary my-5 col-md-2  mx-auto" onClick={() => PreviousPage()}> Prev </button>
+              <button className="btn btn-primary my-5 col-md-2  mx-auto">{page}</button>
+              <button className="btn btn-primary my-5 col-md-2  mx-auto" disabled={recomend <= 0} onClick={() => NextPage()}>Next</button>
             </div>
           </div>
         </div>
       </section>
     </>
-  )
-}
-
-export default ProductDetail
+  );
+};
+export default ProductDetail;
