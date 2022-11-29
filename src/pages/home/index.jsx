@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import styles from "./home.module.css"
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import styles from "./home.module.css";
+import { Link, useNavigate } from "react-router-dom";
 
-import mensuit from '../../assets/mensuit.png'
-import icStar from '../../assets/icStar.svg'
-import icCardTshirt from '../../assets/icCatTshirt.svg'
-import icCardShorts from '../../assets/icCardShorts.svg'
-import icCardJacket from '../../assets/icCardJacket.svg'
-import icCardPants from '../../assets/icCardPants.svg'
-import icCardShoes from '../../assets/icCardShoes.svg'
-import icCardpromo1 from '../../assets/promoone.png'
-import icCardpromo2 from '../../assets/promotwo.png'
+import mensuit from "../../assets/mensuit.png";
+import icStar from "../../assets/icStar.svg";
+import icCardTshirt from "../../assets/icCatTshirt.svg";
+import icCardShorts from "../../assets/icCardShorts.svg";
+import icCardJacket from "../../assets/icCardJacket.svg";
+import icCardPants from "../../assets/icCardPants.svg";
+import icCardShoes from "../../assets/icCardShoes.svg";
+import icCardpromo1 from "../../assets/promoone.png";
+import icCardpromo2 from "../../assets/promotwo.png";
 
-import CardProduct from '../../component/module/cardProduct'
-import Navbar from '../../component/module/navbar'
-
+import CardProduct from "../../component/module/cardProduct";
+import Navbar from "../../component/module/navbar";
+import NavbarLogin from "../../component/module/navbarLogin";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -28,7 +28,8 @@ import "./test.css";
 
 // import required modules
 import { Pagination, Navigation } from "swiper";
-import axios from 'axios'
+import axios from "axios";
+// import { isHtmlElement } from "react-router-dom/dist/dom";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -160,12 +161,48 @@ const Home = () => {
                   modules={[Pagination, Navigation]}
                   className="mySwiper"
                 >
-                  <SwiperSlide> <Link to={`/category`}> <img src={icCardpromo1} alt='icCard' /> </Link> </SwiperSlide>
-                  <SwiperSlide> <Link to={`/category`}> <img src={icCardpromo2} alt='icCard' /> </Link> </SwiperSlide>
-                  <SwiperSlide> <Link to={`/category`}> <img src={icCardpromo1} alt='icCard' /> </Link> </SwiperSlide>
-                  <SwiperSlide> <Link to={`/category`}> <img src={icCardpromo2} alt='icCard' /> </Link> </SwiperSlide>
-                  <SwiperSlide> <Link to={`/category`}> <img src={icCardpromo1} alt='icCard' /> </Link> </SwiperSlide>
-                  <SwiperSlide> <Link to={`/category`}> <img src={icCardpromo2} alt='icCard' /> </Link> </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/category`}>
+                      {" "}
+                      <img src={icCardpromo1} alt="icCard" />{" "}
+                    </Link>{" "}
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/category`}>
+                      {" "}
+                      <img src={icCardpromo2} alt="icCard" />{" "}
+                    </Link>{" "}
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/category`}>
+                      {" "}
+                      <img src={icCardpromo1} alt="icCard" />{" "}
+                    </Link>{" "}
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/category`}>
+                      {" "}
+                      <img src={icCardpromo2} alt="icCard" />{" "}
+                    </Link>{" "}
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/category`}>
+                      {" "}
+                      <img src={icCardpromo1} alt="icCard" />{" "}
+                    </Link>{" "}
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/category`}>
+                      {" "}
+                      <img src={icCardpromo2} alt="icCard" />{" "}
+                    </Link>{" "}
+                  </SwiperSlide>
                 </Swiper>
               </div>
             </div>
@@ -174,7 +211,9 @@ const Home = () => {
             <div className="col-md-12 g-0">
               <div className={`d-flex flex-column ${styles.categorySwiper}`}>
                 <p className={styles.textTitlemain}> Category </p>
-                <p className={styles.textSubmain}>What are you currently looking for</p>
+                <p className={styles.textSubmain}>
+                  What are you currently looking for
+                </p>
 
                 <Swiper
                   slidesPerView={5}
@@ -193,12 +232,42 @@ const Home = () => {
                   {/* {
                     data.map((item, index) => (
                       <div key={index}> */}
-                        <SwiperSlide> <Link to={`/v1/category/2`}> <img src={icCardTshirt} alt='icCard' /> </Link> </SwiperSlide>
-                        <SwiperSlide> <Link to={`/v1/category/6`}> <img src={icCardShorts} alt='icCard' /> </Link></SwiperSlide>
-                        <SwiperSlide> <Link to={`/v1/category/5`}> <img src={icCardJacket} alt='icCard' /> </Link> </SwiperSlide>
-                        <SwiperSlide> <Link to={`/v1/category/3`}> <img src={icCardPants} alt='icCard' /> </Link></SwiperSlide>
-                        <SwiperSlide> <Link to={`/v1/category/4`}> <img src={icCardShoes} alt='icCard' /> </Link></SwiperSlide>
-                      {/* </div>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/v1/category/1`}>
+                      {" "}
+                      <img src={icCardTshirt} alt="icCard" />{" "}
+                    </Link>{" "}
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/v1/category/2`}>
+                      {" "}
+                      <img src={icCardShorts} alt="icCard" />{" "}
+                    </Link>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/v1/category/3`}>
+                      {" "}
+                      <img src={icCardJacket} alt="icCard" />{" "}
+                    </Link>{" "}
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/v1/category/4`}>
+                      {" "}
+                      <img src={icCardPants} alt="icCard" />{" "}
+                    </Link>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    {" "}
+                    <Link to={`/v1/category/5`}>
+                      {" "}
+                      <img src={icCardShoes} alt="icCard" />{" "}
+                    </Link>
+                  </SwiperSlide>
+                  {/* </div>
                     ))
                   } */}
                 </Swiper>
@@ -209,13 +278,41 @@ const Home = () => {
             <div className="col-md-12 g-0">
               <div className={`d-flex flex-column mt-5 ${styles.newSide}`}>
                 <p className={styles.textTitlemain}> New </p>
-                <p className={styles.textSubmain}>You’ve never seen it before!</p>
-                {/* {JSON.stringify(data)} */}
-                
-                  <CardProduct />
-                
+                <p className={styles.textSubmain}>
+                  You’ve never seen it before!
+                </p>
+                <div className="dropdown mb-5">
+                  <button className={`btn btn-secondary dropdown-toggle ${styles.spanCostumsort}`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sort
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li><Link className="dropdown-item" href="#" onClick={() => handleSortasc()}>Sortir berdasarkan{asc}</Link></li>
+                    <li><Link className="dropdown-item" href="#" onClick={() => handleSorting()}>Sortir berdasarkan {sort}</Link></li>
+                  </ul>
+                </div>
+                <div className="row row-cols-1 row-cols-md-5 gx-0 gy-4">
+                  {/* {JSON.stringify(data)} */}
+                  {data.length === 0 ? (
+                    <h3> Data sudah habis </h3>
+                  ) : (
+                    data.map((item) => (
+                      <CardProduct
+                        byId={`/v1/product/${item.product_id}`}
+                        linkImage={item.image}
+                        nameProduct={item.name}
+                        priceProduct={item.price}
+                        sellerProduct={item.seller}
+                      />
+                    ))
+                  )}
+                </div>
               </div>
             </div>
+          </div>
+          <div className='row'>
+            <button className="btn btn-primary my-5 col-md-2  mx-auto" onClick={() => PreviousPage()}> Prev </button>
+            <button className="btn btn-primary my-5 col-md-2  mx-auto">{page}</button>
+            <button className="btn btn-primary my-5 col-md-2  mx-auto" disabled={data <= 0} onClick={() => NextPage()}>Next</button>
           </div>
           <div className="row">
             <div className="col-md-12 g-0">
@@ -260,7 +357,7 @@ const Home = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
