@@ -165,42 +165,42 @@ const Home = () => {
                     {" "}
                     <Link to={`/category`}>
                       {" "}
-                      <img src={icCardpromo1} alt="icCard" />{" "}
+                      <img src={icCardpromo1} alt="icCard" className={styles.ProductPromo} />{" "}
                     </Link>{" "}
                   </SwiperSlide>
                   <SwiperSlide>
                     {" "}
                     <Link to={`/category`}>
                       {" "}
-                      <img src={icCardpromo2} alt="icCard" />{" "}
+                      <img src={icCardpromo2} alt="icCard" className={styles.ProductPromo} />{" "}
                     </Link>{" "}
                   </SwiperSlide>
                   <SwiperSlide>
                     {" "}
                     <Link to={`/category`}>
                       {" "}
-                      <img src={icCardpromo1} alt="icCard" />{" "}
+                      <img src={icCardpromo1} alt="icCard" className={styles.ProductPromo} />{" "}
                     </Link>{" "}
                   </SwiperSlide>
                   <SwiperSlide>
                     {" "}
                     <Link to={`/category`}>
                       {" "}
-                      <img src={icCardpromo2} alt="icCard" />{" "}
+                      <img src={icCardpromo2} alt="icCard" className={styles.ProductPromo} />{" "}
                     </Link>{" "}
                   </SwiperSlide>
                   <SwiperSlide>
                     {" "}
                     <Link to={`/category`}>
                       {" "}
-                      <img src={icCardpromo1} alt="icCard" />{" "}
+                      <img src={icCardpromo1} alt="icCard" className={styles.ProductPromo} />{" "}
                     </Link>{" "}
                   </SwiperSlide>
                   <SwiperSlide>
                     {" "}
                     <Link to={`/category`}>
                       {" "}
-                      <img src={icCardpromo2} alt="icCard" />{" "}
+                      <img src={icCardpromo2} alt="icCard" className={styles.ProductPromo} />{" "}
                     </Link>{" "}
                   </SwiperSlide>
                 </Swiper>
@@ -236,35 +236,35 @@ const Home = () => {
                     {" "}
                     <Link to={`/v1/category/1`}>
                       {" "}
-                      <img src={icCardTshirt} alt="icCard" />{" "}
+                      <img src={icCardTshirt} alt="icCard" className={styles.ProductCategory} />{" "}
                     </Link>{" "}
                   </SwiperSlide>
                   <SwiperSlide>
                     {" "}
                     <Link to={`/v1/category/2`}>
                       {" "}
-                      <img src={icCardShorts} alt="icCard" />{" "}
+                      <img src={icCardShorts} alt="icCard" className={styles.ProductCategory} />{" "}
                     </Link>
                   </SwiperSlide>
                   <SwiperSlide>
                     {" "}
                     <Link to={`/v1/category/3`}>
                       {" "}
-                      <img src={icCardJacket} alt="icCard" />{" "}
+                      <img src={icCardJacket} alt="icCard" className={styles.ProductCategory} />{" "}
                     </Link>{" "}
                   </SwiperSlide>
                   <SwiperSlide>
                     {" "}
                     <Link to={`/v1/category/4`}>
                       {" "}
-                      <img src={icCardPants} alt="icCard" />{" "}
+                      <img src={icCardPants} alt="icCard" className={styles.ProductCategory} />{" "}
                     </Link>
                   </SwiperSlide>
                   <SwiperSlide>
                     {" "}
                     <Link to={`/v1/category/5`}>
                       {" "}
-                      <img src={icCardShoes} alt="icCard" />{" "}
+                      <img src={icCardShoes} alt="icCard" className={styles.ProductCategory} />{" "}
                     </Link>
                   </SwiperSlide>
                   {/* </div>
@@ -310,9 +310,9 @@ const Home = () => {
             </div>
           </div>
           <div className='row'>
-            <button className="btn btn-primary my-5 col-md-2  mx-auto" onClick={() => PreviousPage()}> Prev </button>
-            <button className="btn btn-primary my-5 col-md-2  mx-auto">{page}</button>
-            <button className="btn btn-primary my-5 col-md-2  mx-auto" disabled={data <= 0} onClick={() => NextPage()}>Next</button>
+            <button className="btn btn-primary my-5 col-2  mx-auto" onClick={() => PreviousPage()}> Prev </button>
+            <button className="btn btn-primary my-5 col-2  mx-auto">{page}</button>
+            <button className="btn btn-primary my-5 col-2  mx-auto" disabled={data <= 0} onClick={() => NextPage()}>Next</button>
           </div>
           <div className="row">
             <div className="col-md-12 g-0">
@@ -347,9 +347,9 @@ const Home = () => {
                   )}
                 </div>
                 <div className='row'>
-                  <button className="btn btn-primary my-5 col-md-2  mx-auto" onClick={() => PreviousPage()}> Prev </button>
-                  <button className="btn btn-primary my-5 col-md-2  mx-auto">{page}</button>
-                  <button className="btn btn-primary my-5 col-md-2  mx-auto" disabled={data <= 0} onClick={() => NextPage()}>Next</button>
+                  <button className="btn btn-primary my-5 col-2  mx-auto" onClick={() => PreviousPage()}> Prev </button>
+                  <button className="btn btn-primary my-5 col-2  mx-auto">{page}</button>
+                  <button className="btn btn-primary my-5 col-2  mx-auto" disabled={data <= 0} onClick={() => NextPage()}>Next</button>
                 </div>
               </div>
             </div>

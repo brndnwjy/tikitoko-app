@@ -132,5 +132,13 @@
     .cstmSearch{
         width: 200px;
     }
+    .ProductPromo{
+        height: 80px !important;
+        width: 130px !important;
+    }
 
+    .ProductCategory{
+        height: 150px !important;
+        width: 80px !important;
+    }
 }

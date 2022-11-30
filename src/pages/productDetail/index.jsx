@@ -372,9 +372,9 @@ const ProductDetail = () => {
               )}
             </div>
             <div className='row'>
-              <button className="btn btn-primary my-5 col-md-2  mx-auto" onClick={() => PreviousPage()}> Prev </button>
-              <button className="btn btn-primary my-5 col-md-2  mx-auto">{page}</button>
-              <button className="btn btn-primary my-5 col-md-2  mx-auto" disabled={recomend <= 0} onClick={() => NextPage()}>Next</button>
+              <button className="btn btn-primary my-5 col-2  mx-auto" onClick={() => PreviousPage()}> Prev </button>
+              <button className="btn btn-primary my-5 col-2  mx-auto">{page}</button>
+              <button className="btn btn-primary my-5 col-2  mx-auto" disabled={recomend <= 0} onClick={() => NextPage()}>Next</button>
             </div>
           </div>
         </div>
