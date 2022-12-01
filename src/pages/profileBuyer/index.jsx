@@ -45,6 +45,23 @@ const ProfileBuyer = () => {
         console.error(error);
       });
   }, []);
+
+  // const [updateStatus, setUpdateStatus] = useState();
+
+  const cancelOrder = (order_id) => {
+    axios
+      .put(
+        `http://localhost:4000/v1/order/cancel/${order_id}`
+      )
+      .then((response) => {
+        alert("Order has been canceled");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   const [users, setUsers] = useState({});
 
   const data = JSON.parse(localStorage.getItem("data"));
@@ -286,7 +303,7 @@ const ProfileBuyer = () => {
       <Navbar />
       <div className={`container-fluid bg-light ${styles.customContainer}`}>
         <div className="row">
-          <div className={`col-md-3 bg-white py-4 px-5`}>
+          <div className={`col-md-3 col-lg-3 bg-white py-4 px-5`}>
             <div className="col-md-12 mt-5 ">
               <div className="row">
                 <div className="col-md-3 mx-2">
@@ -302,7 +319,7 @@ const ProfileBuyer = () => {
                     className="rounded-circle"
                   />
                 </div>
-                <div className="col-md-6 ">
+                <div className={`col-md-6 ${styles.mobileCol3}`}>
                   <h6 className="mt-1">{users.name}</h6>
                   <p type="button" onClick={handleEdit}>
                     {/* <i className="text-muted">Ubah profile</i> */}
@@ -1074,22 +1091,6 @@ const ProfileBuyer = () => {
                     <Link
                       className="btn text-muted me-4 "
                       data-bs-toggle="collapse"
-                      to="#packed"
-                      onClick={() => setViewCollapse(2)}
-                    >
-                      Packed
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 ms-4"
-                      data-bs-toggle="collapse"
-                      to="#sent"
-                      onClick={() => setViewCollapse(3)}
-                    >
-                      Sent
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
                       to="#completed"
                       onClick={() => setViewCollapse(4)}
                     >
@@ -1148,22 +1149,6 @@ const ProfileBuyer = () => {
                     <Link
                       className="btn text-muted me-4 "
                       data-bs-toggle="collapse"
-                      to="#packed"
-                      onClick={() => setViewCollapse(2)}
-                    >
-                      Packed
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 ms-4"
-                      data-bs-toggle="collapse"
-                      to="#sent"
-                      onClick={() => setViewCollapse(3)}
-                    >
-                      Sent
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
                       to="#completed"
                       onClick={() => setViewCollapse(4)}
                     >
@@ -1194,177 +1179,12 @@ const ProfileBuyer = () => {
                                 price={item.price * item.qty}
                                 qty={item.qty}
                               />
+                              <button onClick={(e) => cancelOrder(item.order_id, e)} className="btn btn-primary">Cancel</button>
                             </div>
                           );
                         }
                       })
                     : null}
-                </div>
-              ) : viewCollapse === 2 ? (
-                <div className="col-md-12" id="address">
-                  <div className="col-md-12">
-                    <h5 className="fw-bold">My order</h5>
-                  </div>
-                  <p className="mt-3">
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
-                      to="#allItem"
-                      onClick={() => setViewCollapse(0)}
-                    >
-                      All items
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 ms-3"
-                      data-bs-toggle="collapse"
-                      to="#notPaid"
-                      onClick={() => setViewCollapse(1)}
-                    >
-                      Not yet paid
-                    </Link>
-                    <Link
-                      className="btn text-danger me-4 "
-                      data-bs-toggle="collapse"
-                      to="#packed"
-                      style={{
-                        borderBottom: "2px solid red",
-                        color: "red",
-                      }}
-                      onClick={() => setViewCollapse(2)}
-                    >
-                      Packed
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 ms-4"
-                      data-bs-toggle="collapse"
-                      to="#sent"
-                      onClick={() => setViewCollapse(3)}
-                    >
-                      Sent
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
-                      to="#completed"
-                      onClick={() => setViewCollapse(4)}
-                    >
-                      Completed
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
-                      to="#cancel"
-                      onClick={() => setViewCollapse(5)}
-                    >
-                      Order cancel
-                    </Link>
-                  </p>
-                  <hr />
-                  <div className="collapse multi-collapse" id="packed">
-                    <div className="container mt-5">
-                      <div className={styles["card"]}>
-                        <div className="card-body px-4 py-4">
-                          <div className={styles["product"]}>
-                            <div className="d-flex align-items-center">
-                              <img
-                                className={styles["product-img"]}
-                                src={require("../../assets/Mask Group.png")}
-                                alt="suite"
-                              />
-                              <div className={styles["brand"]}>
-                                <h5>Men's formal suit - Black</h5>
-                                <p>Zalora</p>
-                              </div>
-                            </div>
-                            <p className={styles["price"]}>$ 20.0</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : viewCollapse === 3 ? (
-                <div className="col-md-12" id="address">
-                  <div className="col-md-12">
-                    <h5 className="fw-bold">My order</h5>
-                  </div>
-                  <p className="mt-3">
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
-                      to="#allItem"
-                      onClick={() => setViewCollapse(0)}
-                    >
-                      All items
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 ms-3"
-                      data-bs-toggle="collapse"
-                      to="#notPaid"
-                      onClick={() => setViewCollapse(1)}
-                    >
-                      Not yet paid
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
-                      to="#packed"
-                      onClick={() => setViewCollapse(2)}
-                    >
-                      Packed
-                    </Link>
-                    <Link
-                      className="btn text-danger me-4 ms-4"
-                      data-bs-toggle="collapse"
-                      to="#sent"
-                      style={{
-                        borderBottom: "2px solid red",
-                        color: "red",
-                      }}
-                      onClick={() => setViewCollapse(3)}
-                    >
-                      Sent
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
-                      to="#completed"
-                      onClick={() => setViewCollapse(4)}
-                    >
-                      Completed
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
-                      to="#cancel"
-                      onClick={() => setViewCollapse(5)}
-                    >
-                      Order cancel
-                    </Link>
-                  </p>
-                  <hr />
-                  <div className="collapse multi-collapse" id="sent">
-                    <div className="container mt-5">
-                      <div className={styles["card"]}>
-                        <div className="card-body px-4 py-4">
-                          <div className={styles["product"]}>
-                            <div className="d-flex align-items-center">
-                              <img
-                                className={styles["product-img"]}
-                                src={require("../../assets/Mask Group.png")}
-                                alt="suite"
-                              />
-                              <div className={styles["brand"]}>
-                                <h5>Men's formal suit - Black</h5>
-                                <p>Zalora</p>
-                              </div>
-                            </div>
-                            <p className={styles["price"]}>$ 20.0</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               ) : viewCollapse === 4 ? (
                 <div className="col-md-12" id="address">
@@ -1387,22 +1207,6 @@ const ProfileBuyer = () => {
                       onClick={() => setViewCollapse(1)}
                     >
                       Not yet paid
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
-                      to="#packed"
-                      onClick={() => setViewCollapse(2)}
-                    >
-                      Packed
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 ms-4"
-                      data-bs-toggle="collapse"
-                      to="#sent"
-                      onClick={() => setViewCollapse(3)}
-                    >
-                      Sent
                     </Link>
                     <Link
                       className="btn text-danger me-4 "
@@ -1472,22 +1276,6 @@ const ProfileBuyer = () => {
                     <Link
                       className="btn text-muted me-4 "
                       data-bs-toggle="collapse"
-                      to="#packed"
-                      onClick={() => setViewCollapse(2)}
-                    >
-                      Packed
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 ms-4"
-                      data-bs-toggle="collapse"
-                      to="#sent"
-                      onClick={() => setViewCollapse(3)}
-                    >
-                      Sent
-                    </Link>
-                    <Link
-                      className="btn text-muted me-4 "
-                      data-bs-toggle="collapse"
                       to="#completed"
                       onClick={() => setViewCollapse(4)}
                     >
@@ -1507,28 +1295,26 @@ const ProfileBuyer = () => {
                     </Link>
                   </p>
                   <hr />
-                  <div className="collapse multi-collapse" id="cancel">
-                    <div className="container mt-5">
-                      <div className={styles["card"]}>
-                        <div className="card-body px-4 py-4">
-                          <div className={styles["product"]}>
-                            <div className="d-flex align-items-center">
-                              <img
-                                className={styles["product-img"]}
-                                src={require("../../assets/Mask Group.png")}
-                                alt="suite"
+                  {allItem
+                    ? allItem.map((item, index) => {
+                        if (item.status == 2) {
+                          return (
+                            <div
+                              className="collapse multi-collapse"
+                              id="cancel"
+                            >
+                              <Card
+                                title={item.name}
+                                storetitle={item.seller_name}
+                                image={item.image}
+                                price={item.price * item.qty}
+                                qty={item.qty}
                               />
-                              <div className={styles["brand"]}>
-                                <h5>Men's formal suit - Black</h5>
-                                <p>Zalora</p>
-                              </div>
                             </div>
-                            <p className={styles["price"]}>$ 20.0</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                          );
+                        }
+                      })
+                    : null}
                 </div>
               ) : null}
             </div>

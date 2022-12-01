@@ -283,3 +283,9 @@
     color: #222222;
     margin-top: 1px;
 }/* CSS Checkout Page */
+
+@media screen and (min-width: 768px) and (max-width: 1070px){
+    .mobileCol3{
+        width: 100% !important;
+    }
+}
