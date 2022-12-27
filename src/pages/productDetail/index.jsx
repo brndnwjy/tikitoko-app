@@ -231,11 +231,11 @@ const ProductDetail = () => {
                     Add Bag
                   </button>
                 </Link>
-                <Link to="#">
+                {/* <Link to="#">
                   <button className={`py-2 ${styles.btnbuyNow}`}>
                     Buy Now
                   </button>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

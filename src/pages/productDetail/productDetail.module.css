@@ -156,24 +156,17 @@
   outline: none;
 }
 
-.btnChat:hover,
-.btnaddBag:hover {
+.btnaddBag{
+  border-color: #db3022;
+  background-color: #db3022;
+  color: white;
+}
+
+.btnChat:hover {
   border-color: #db3022;
   background-color: #db3022;
   color: white;
   transition: 0.5s;
-}
-
-.btnbuyNow {
-  padding-left: 100px;
-  padding-right: 100px;
-  border-radius: 50px;
-  border-color: #db3022;
-  background-color: #db3022;
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  outline: none;
 }
 
 .pageTwo {
@@ -279,14 +272,6 @@
   }
 
   .btnaddBag {
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-    border-radius: 35px;
-  }
-
-  .btnbuyNow {
     padding-left: 25px;
     padding-right: 25px;
     padding-top: 10px !important;
