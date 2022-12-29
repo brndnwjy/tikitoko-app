@@ -4,18 +4,15 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./profileSeller.module.css";
-import pictureUser from "../../assets/user-icon.svg";
 import iconHome from "../../assets/home-icon.svg";
 import iconPensil from "../../assets/pencil-icon.svg";
 import packageIcon from "../../assets/package-icon.svg";
 import iconOrder from "../../assets/cart-icon-white.svg";
 import iconEmpety from "../../assets/no-product.png";
 import iconMyOrderEmpty from "../../assets/no-order.png";
-import iconBell from "../../assets/bell-icon.svg";
-import iconMail from "../../assets/mail-icon.svg";
 import searchIcon from "../../assets/search-icon.svg";
-import logo from "../../assets/logo.svg";
 import swal from "sweetalert";
+import Navbar from "../../component/module/navbarLogin";
 // import { getDetailSeller } from "../../redux/action/user.action";
 
 const ProfileSeller = () => {
@@ -109,7 +106,6 @@ const ProfileSeller = () => {
           text: `Your store have been updated`,
           icon: "success",
         });
-        
       })
       .catch((err) => {
         console.log(err);
@@ -157,7 +153,6 @@ const ProfileSeller = () => {
           text: `New product have been added`,
           icon: "success",
         });
-        
       })
       .catch((err) => {
         console.log(err);
@@ -236,7 +231,6 @@ const ProfileSeller = () => {
       .then((res) => {
         console.log(res);
         alert("Delete Success");
-        
       })
       .catch((err) => {
         console.log(err);
@@ -289,7 +283,6 @@ const ProfileSeller = () => {
           text: `Your product have been updated`,
           icon: "success",
         });
-        
       })
       .catch((err) => {
         console.log(err);
@@ -320,7 +313,7 @@ const ProfileSeller = () => {
   // Logout Handling
   const [isLogout, setIsLogout] = useState(false);
 
-  const handleLogout = () => {
+  const logout = () => {
     swal({
       title: "Logging Out",
       text: `Are you sure want to leave?`,
@@ -329,9 +322,7 @@ const ProfileSeller = () => {
       dangerMode: true,
     }).then(async (confirm) => {
       if (confirm) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("buyer");
-        localStorage.removeItem("persist:data");
+        localStorage.clear();
         setIsLogout(true);
       }
     });
@@ -370,7 +361,9 @@ const ProfileSeller = () => {
 
   return (
     <section>
-      <div className="container-fluid-custom fixed-top">
+      <Navbar />
+
+      {/* <div className="container-fluid-custom fixed-top">
         <div className={styles.containerCustomNavbarSeller}>
           <div className="container">
             <nav className="navbar navbar-expand-lg">
@@ -413,7 +406,8 @@ const ProfileSeller = () => {
             </nav>
           </div>
         </div>
-      </div>
+      </div> */}
+
       <div className={styles.containerFluidCustom}>
         <div className="row">
           <div className={`col-md-3 ${styles.containerSatu}`}>
@@ -676,6 +670,14 @@ const ProfileSeller = () => {
                     </div>
                   </div>
                 </div>
+                <button
+                  type="submit"
+                  className="mt-3 btn btn-outline-danger mt-2 rounded-pill"
+                  style={{ width: "100%" }}
+                  onClick={logout}
+                >
+                  Logout
+                </button>
               </div>
             </div>
           </div>

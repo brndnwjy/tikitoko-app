@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./navbarlogin.module.css";
 
@@ -6,13 +6,14 @@ import icLogo from "../../../assets/logo.svg";
 import icSearch from "../../../assets/search-icon.svg";
 import icFilter from "../../../assets/filter-icon.svg";
 import icCart from "../../../assets/cart-icon.svg";
-import icBell from "../../../assets/bell-icon.svg";
 import icMail from "../../../assets/mail-icon.svg";
 import icAva from "../../../assets/icAva.png";
 
 const NavbarLogin = () => {
   const navigate = useNavigate();
 
+  const [ava, setAva] = useState();
+  const [role, setRole] = useState();
   const [search, setSearch] = useState();
 
   const handleSearch = (e) => {
@@ -21,6 +22,18 @@ const NavbarLogin = () => {
       return navigate(`/search?q=${search}`);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("buyer")) {
+      setRole(true);
+      const user = JSON.parse(localStorage.getItem("buyer"));
+      setAva(user.avatar);
+    } else if (localStorage.getItem("seller")) {
+      setRole(false);
+      const user = JSON.parse(localStorage.getItem("seller"));
+      setAva(user.avatar);
+    }
+  }, []);
 
   return (
     <>
@@ -78,20 +91,16 @@ const NavbarLogin = () => {
               </li>
             </ul>
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link className="nav-link" to="/mybag">
-                  <button className={`px-2 ${styles.btnCart}`}>
-                    <img src={icCart} alt="icCart" />
-                  </button>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  <button className={`px-2 ${styles.btnCart}`}>
-                    <img src={icBell} alt="icBell" />
-                  </button>
-                </Link>
-              </li>
+              {role && (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/mybag">
+                    <button className={`px-2 ${styles.btnCart}`}>
+                      <img src={icCart} alt="icCart" />
+                    </button>
+                  </Link>
+                </li>
+              )}
+
               <li className="nav-item">
                 <Link className="nav-link" to="/chat">
                   <button className={`px-2 ${styles.btnCart}`}>
@@ -99,14 +108,19 @@ const NavbarLogin = () => {
                   </button>
                 </Link>
               </li>
+
               <li className="dropdown">
                 <button
                   className={`px-2 mt-1 ${styles.btnAva}`}
                   type="button"
                   data-bs-toggle="dropdown"
-                  onClick={() => navigate("/profile")}
+                  onClick={() => navigate(role ? "/profile" : "/store")}
                 >
-                  <img src={icAva} alt="icCart" className={styles.cstmAva} />
+                  <img
+                    src={ava ? ava : icAva}
+                    alt="icCart"
+                    className={styles.cstmAva}
+                  />
                 </button>
               </li>
             </ul>

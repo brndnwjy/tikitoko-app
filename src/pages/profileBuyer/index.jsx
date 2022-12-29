@@ -206,14 +206,11 @@ const ProfileBuyer = () => {
     }).then(async (confirm) => {
       if (confirm) {
         axios
-          .delete(
-            `https://tikitoko.up.railway.app/v1/address/${address_id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
-          )
+          .delete(`https://tikitoko.up.railway.app/v1/address/${address_id}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
           .then((res) => {
             setAddressForm(res.data.data);
             swal({
@@ -301,6 +298,8 @@ const ProfileBuyer = () => {
     });
   };
 
+  const [isLogout, setIsLogout] = useState(false);
+
   const logout = () => {
     swal({
       title: "Logging Out",
@@ -311,10 +310,21 @@ const ProfileBuyer = () => {
     }).then(async (confirm) => {
       if (confirm) {
         localStorage.clear();
-        navigate("/login");
+        setIsLogout(true)
       }
     });
   };
+
+  useEffect(() => {
+    if (isLogout) {
+      swal({
+        title: "Logged Out",
+        text: `You have been logged out`,
+        icon: "success",
+      });
+      navigate("/login");
+    }
+  }, [isLogout, navigate]);
 
   return (
     <>
