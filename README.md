@@ -2,7 +2,7 @@
 
 <!-- Logo -->
 <div align="center">
-<img src="./src/documentation/logo.png" align="center" width="200" height="auto" />
+<img src="./documentation/logo.png" align="center" width="200" height="auto" />
 </div>
 
 <!-- Table of Contents -->
@@ -110,8 +110,8 @@ Contributions are what make the open source community such an amazing place to b
 ## Screenshoots
 <table>
   <tr>
-    <td><image src="./src/documentation/register-b.jpeg" alt="Register - Buyer" width=100% ></td>
-    <td><image src="./src/documentation/login-b.jpeg" alt="Login - Buyer" width=100%/></td>
+    <td><image src="./documentation/register-b.jpeg" alt="Register - Buyer" width=100% ></td>
+    <td><image src="./documentation/login-b.jpeg" alt="Login - Buyer" width=100%/></td>
   </tr>
   <tr>
     <td align="center">Register (Buyer)</td>
@@ -119,8 +119,8 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
   
   <tr>
-    <td><image src="./src/documentation/register-s.jpeg" alt="Register - Seller" width=100% ></td>
-    <td><image src="./src/documentation/login-s.jpeg" alt="Login - Seller" width=100%/></td>
+    <td><image src="./documentation/register-s.jpeg" alt="Register - Seller" width=100% ></td>
+    <td><image src="./documentation/login-s.jpeg" alt="Login - Seller" width=100%/></td>
   </tr>
   <tr>
     <td align="center">Register (Seller)</td>
@@ -128,8 +128,8 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
   
   <tr>
-    <td><image src="./src/documentation/home.jpeg" alt="Homepage" width=100%></td>
-    <td><image src="./src/documentation/search.jpeg" alt="Searchpage" width=100%></td>
+    <td><image src="./documentation/home.png" alt="Homepage" width=100%></td>
+    <td><image src="./documentation/search.png" alt="Searchpage" width=100%></td>
   </tr>
   <tr>
       <td align="center">Homepage</td>
@@ -137,8 +137,8 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
 
   <tr>
-    <td><image src="./src/documentation/product-detail.jpeg" alt="Product Detail" width=100%></td>
-    <td><image src="./src/documentation/chat.jpeg" alt="Chat page" width=100%/></td>
+    <td><image src="./documentation/product-detail.png" alt="Product Detail" width=100%></td>
+    <td><image src="./documentation/chat.jpeg" alt="Chat page" width=100%/></td>
   </tr>
    <tr>
     <td align="center">Product Detail</td>
@@ -146,8 +146,8 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
   
   <tr>
-    <td><image src="./src/documentation/mybag.jpeg" alt="Mybag" width=100%></td>
-    <td><image src="./src/documentation/checkout.jpeg" alt="Checkout" width=100%></td>
+    <td><image src="./documentation/mybag.jpeg" alt="Mybag" width=100%></td>
+    <td><image src="./documentation/checkout.jpeg" alt="Checkout" width=100%></td>
   </tr>
   <tr>
       <td align="center">My Bag</td>
@@ -155,8 +155,8 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
   
   <tr>
-    <td><image src="./src/documentation/profile-b.jpeg" alt="Profile" width=100%></td>
-    <td><image src="./src/documentation/profile-b-address.jpeg" alt="Profile - Address" width=100%></td>
+    <td><image src="./documentation/profile-b.jpeg" alt="Profile" width=100%></td>
+    <td><image src="./documentation/profile-b-address.jpeg" alt="Profile - Address" width=100%></td>
   </tr>
   <tr>
       <td align="center">Profile (Buyer)</td>
@@ -164,8 +164,8 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
   
   <tr>
-    <td><image src="./src/documentation/profile-b-all-order.jpeg" alt="Profile - Order" width=100%></td>
-    <td><image src="./src/documentation/profile-b-unpaid-order.jpeg" alt="Profile - Cancel Order" width=100%></td>
+    <td><image src="./documentation/profile-b-all-order.jpeg" alt="Profile - Order" width=100%></td>
+    <td><image src="./documentation/profile-b-unpaid-order.jpeg" alt="Profile - Cancel Order" width=100%></td>
   </tr>
   <tr>
       <td align="center">Profile (Buyer) - Order Sect.</td>
@@ -173,8 +173,8 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
   
   <tr>
-    <td><image src="./src/documentation/profile-s.jpeg" alt="Profile (Seller)" width=100%></td>
-    <td><image src="./src/documentation/profile-s-list-product.jpeg" alt="Profile (Seller) - Product List" width=100%></td>    
+    <td><image src="./documentation/profile-s.jpeg" alt="Profile (Seller)" width=100%></td>
+    <td><image src="./documentation/profile-s-list-product.jpeg" alt="Profile (Seller) - Product List" width=100%></td>    
   </tr>
   <tr>
      <td align="center">Profile (Seller)</td>
@@ -182,8 +182,8 @@ Contributions are what make the open source community such an amazing place to b
   </tr>
   
   <tr>
-    <td><image src="./src/documentation/profile-s-new-product.jpeg" alt="Profile (Seller) - New Product" width=100%></td>
-    <td><image src="./src/documentation/profile-s-order.jpeg" alt="Profile (Seller) - Order" width=100%></td>    
+    <td><image src="./documentation/product-add.png" alt="Profile (Seller) - New Product" width=100%></td>
+    <td><image src="./documentation/profile-s-order.jpeg" alt="Profile (Seller) - Order" width=100%></td>    
   </tr>
   <tr>
      <td align="center">Profile (Seller) - New Product</td>
