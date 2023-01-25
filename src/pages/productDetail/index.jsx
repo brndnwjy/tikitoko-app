@@ -27,7 +27,6 @@ import { Link, useParams } from "react-router-dom";
 import swal from "sweetalert";
 
 const ProductDetail = () => {
-
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const [data, setData] = useState([]);
@@ -225,17 +224,17 @@ const ProductDetail = () => {
                 </Link>
                 <Link to={`/mybag`}>
                   <button
-                    className={`mx-3 py-2 ${styles.btnaddBag}`}
+                    className={`mx-3 py-2 ${styles.btnbuyNow}`}
                     onClick={(e) => handlePostBag(e)}
                   >
                     Add Bag
                   </button>
                 </Link>
-                <Link to="#">
+                {/* <Link to="#">
                   <button className={`py-2 ${styles.btnbuyNow}`}>
                     Buy Now
                   </button>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
